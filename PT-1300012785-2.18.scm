@@ -1,0 +1,5 @@
+(define (reverse l)
+  (define (iter result rest)
+    (cond ((null? rest) result)
+          (else (iter (cons (car rest) result) (cdr rest)))))
+  (iter '() l))
