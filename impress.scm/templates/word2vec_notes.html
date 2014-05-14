@@ -1,0 +1,318 @@
+<html>
+ <head>
+ 
+<meta name="viewpoint" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/default.css">
+
+
+<style> .slide {
+ font-size: 24px; 
+}
+ 
+</style> 
+</head> 
+ <body>
+ <div id="impress">
+ <div class="step slide"  data-y="0" data-x="0">
+ <div style="width:100%;">
+ <div style="height:100%; width:100%">
+ <div style="height:16%; width:100%;">
+ 
+ </div>
+<div style="height:16%; width:100%;">
+ <p style="font-size: 54px;;text-align: center;">
+ <strong >
+ <span >
+ word2vec: notes on implementation
+ </span>
+ </strong>
+ </p>
+ </div>
+<div style="height:16%; width:100%;">
+ <p style="font-size: 32px;;text-align: center;;font-style: italic">
+ <span >
+ 
+ </span>
+ </p>
+ </div>
+<div style="height:16%; width:100%;">
+ <p style="font-size: 24px;;text-align: right;">
+ <span >
+ yang zhixuan
+ </span>
+ </p>
+ </div>
+<div style="height:16%; width:100%;">
+ 
+ </div>
+<div style="height:16%; width:100%;">
+ 
+ </div>
+ </div>
+
+ </div>
+ </div>
+<div class="step slide" style="font-size: 22px;" data-y="0" data-x="1000">
+ <div style="width:100%;">
+ <div style="height:100%; width:100%">
+ <div style="height:100%; width:10%; float:left;">
+ 
+ </div>
+<div style="height:100%; width:80%; float:left;">
+ <div style="width:100%;">
+ <p >
+ <strong >
+ <span >
+ Story line:
+ </span>
+ </strong>
+ </p>
+
+<ol >
+ <li >
+ <p >
+ <span >
+ train word vectors with applications
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ by application, we use language models or simplified language models
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ Mikolov proposed two simplified language model for training word vectors: CBOW and skip-gram
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ Mikolov observed skip-gram outperforms all the other models(NNLM, RNNLM, CBOW...)
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ He introduced several extensions for training skip-gram: negative sampling and subsampling
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ He open-sourced an extremely optimized C program for training skip-gram and CBOW: word2vec
+ </span>
+ </p>
+ </li>
+ </ol>
+
+ </div>
+ </div>
+<div style="height:100%; width:10%; float:left;">
+ 
+ </div>
+<div style="float:clear">
+ 
+ </div>
+ </div>
+
+ </div>
+ </div>
+<div class="step slide"  data-y="0" data-x="2000">
+ <div style="width:100%;">
+ <div style="height:100%; width:100%">
+ <div style="height:100%; width:10%; float:left;">
+ 
+ </div>
+<div style="height:100%; width:80%; float:left;">
+ <div style="width:100%;">
+ <ul >
+ <li >
+ <p >
+ <span >
+ NNLM: predicate(by neural network) the probability of words as being the next word after a word sequence
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ CBOW: predicate(by linear soft-max regression with shared project layer) the probability of words as being the middle word before and after a word sequence
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ skip-gram: predicate (by linear soft-max regression) the probability of words observed around a word
+ </span>
+ </p>
+ </li>
+ </ul>
+
+<p >
+ <strong >
+ <span >
+ Comparison:
+ </span>
+ </strong>
+ </p>
+
+<ul >
+ <li >
+ <p >
+ <span >
+ skip-gram outperforms all the other models especially in semantics?
+ </span>
+ </p>
+ </li>
+<li >
+ <p >
+ <span >
+ how to train word vectors when copora is limited?
+ </span>
+ </p>
+ </li>
+ </ul>
+
+ </div>
+ </div>
+<div style="height:100%; width:10%; float:left;">
+ 
+ </div>
+<div style="float:clear">
+ 
+ </div>
+ </div>
+
+ </div>
+ </div>
+<div class="step slide"  data-y="0" data-x="3000">
+ <div style="width:100%;">
+ <div style="height:100%; width:100%">
+ <div style="height:100%; width:10%; float:left;">
+ 
+ </div>
+<div style="height:100%; width:80%; float:left;">
+ <div style="width:100%;">
+ <p >
+ <strong >
+ <span >
+ Extensions
+ </span>
+ </strong>
+ </p>
+
+<ul >
+ <li >
+ <div style="width:100%;">
+ <p >
+ <span >
+ Hierarchical soft-max
+ </span>
+ </p>
+
+<p >
+ <strong >
+ <span >
+ ontology tree for hierarchical soft-max?
+ </span>
+ </strong>
+ </p>
+
+ </div>
+ </li>
+<li >
+ <div style="width:100%;">
+ <p >
+ <span >
+ Negative sampling
+ </span>
+ </p>
+
+<p >
+ <span >
+ negative sampling works better when the dimension of vector is small?
+ </span>
+ </p>
+
+ </div>
+ </li>
+<li >
+ <div style="width:100%;">
+ <p >
+ <span >
+ Subsampling for frequent words
+ </span>
+ </p>
+
+ </div>
+ </li>
+ </ul>
+
+ </div>
+ </div>
+<div style="height:100%; width:10%; float:left;">
+ 
+ </div>
+<div style="float:clear">
+ 
+ </div>
+ </div>
+
+ </div>
+ </div>
+<div class="step slide"  data-y="0" data-x="4000">
+ <div style="width:100%;">
+ <div style="height:100%; width:100%">
+ <div style="height:16%; width:100%;">
+ 
+ </div>
+<div style="height:16%; width:100%;">
+ <p style="font-size: 54px;;text-align: center;">
+ <strong >
+ <span >
+ 
+ </span>
+ </strong>
+ </p>
+ </div>
+<div style="height:16%; width:100%;">
+ <p style="font-size: 32px;;text-align: center;;font-style: italic">
+ <span >
+ This slides is written by scheme!
+ </span>
+ </p>
+ </div>
+<div style="height:16%; width:100%;">
+ <p style="font-size: 24px;;text-align: right;">
+ <span >
+ 
+ </span>
+ </p>
+ </div>
+<div style="height:16%; width:100%;">
+ 
+ </div>
+<div style="height:16%; width:100%;">
+ 
+ </div>
+ </div>
+
+ </div>
+ </div>
+ </div>
+<script style="text/javascript" src="js/impress.js"></script>
+<script>
+impress().init();
+</script> 
+</body> 
+</html>

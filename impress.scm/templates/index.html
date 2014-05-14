@@ -1,0 +1,504 @@
+<html lang="en" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="favicon.ico">
+    <title>A Breif Survey of NER Task</title>
+    <link href="css/default.css" rel="stylesheet">
+    <style>
+        @font-face{
+            font-family: monospace;
+            src: url("fonts/Monaco_Linux-Powerline.ttf");
+        }
+
+        .magnifier{
+            transition:1s;
+        }
+        .magnifier:hover{
+            display:block;
+            font-size:150%;
+            transition: 1s;
+            //background-color: rgba(233,233,253, 0.8);
+            border-radius: 0.5em;
+            border-style: dotted;
+        }
+
+        .step{
+            font-family: monospace;
+            font-size: 36px;
+        }
+
+        ul,ol,dl{
+            margin-top: 5%;
+        }
+        dt {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        dd {
+            margin: 0;
+            margin-left: 6%;
+            padding: 0 0 0.5em 0;
+        }
+        li{
+            margin-top:1%
+
+        }
+
+        .longlist li{
+            margin-top: 1%;
+        }
+
+        .shortlist >li{
+            margin-top: 5%;
+        }
+
+        .sublist{
+            margin-top:0%;
+            margin-left:8%;
+        }
+
+        pre { white-space: pre-wrap; font-family: monospace; color: #657b83; }
+        * { font-size: 1em; }
+        
+        .hlLevel0 { color: #cd0000; }
+        .hlLevel1 { color: #cd3700; }
+        .hlLevel2 { color: #ee9a00; }
+        .Statement { color: #719e07; }
+        .hlLevel3 { color: #cdcd00; }
+        .hlLevel4 { color: #698b22; }
+        .hlLevel5 { color: #008b00; }
+        .Constant { color: #2aa198; }
+        .Identifier { color: #268bd2; }
+
+        footer{ font-size: 60%; position: absolute; bottom: 10%; }
+        .ref { font-style: italic; }
+    </style>
+
+
+      <!-- Mathjax -->
+
+        <script type="text/javascript" src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script>
+            MathJax.Hub.Config({
+                "HTML-CSS": {
+                    availableFonts: [], preferredFont: null, // force Web fonts
+                    webFont:"Neo-Euler",
+                }
+            });
+        </script>
+</head>
+<body class="impress-not-supported">
+    <div class="fallback-message">
+        <p>很遗憾本浏览器不支持impress.js，请使用<b>Google Chrome</b>等现代浏览器</p>
+    </div>
+
+    <div id="impress">
+         <div class="step" data-x="" data-y="" data-z="">
+             <div style="font-size: 150%; position:relative; left:0%;">
+                 <h2 style="position: relative; left: 15%"> A Brief Survey of  </h2>
+                 <h1 style="font-style: italic"> Named Entity Recognition</h1>
+                 <h2 style="position: relative; left: 15%; font-size:smaller; font-style: italic"> (and Review on CRF)</h2>
+             </div>
+
+             <br>
+             <span style="float: right; font-size:80%">yang zhixuan</span>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="">
+            <p>Definition of NER Task</p>
+
+            <dl style="font-size: 60%">
+                <dt> practical definition </dt>
+                <dd> Automatically recognize enamex{name, location, organization name}, timex{date, time}, numex{money, percent} and <span style="font-style:italic">etc.</span> from text</dd>
+
+                <dt> abstract definition </dt>
+                <dd> Automatically recognize entities which have one or more <strong> rigid designators </strong> from text</dd>
+
+                <dt> rigid designator </dt>
+                <dd> A term is said to be a rigid designator when it designates  the same thing in all possible worlds in which that thing exists and does not designate anything else if that thing does not exist [1]</dt>
+
+            </dl>
+            <footer style=""> [1] : <span class="ref">Naming and Necessity</span>, Saul Kripke 1971</footer>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="">
+            <p>Algorithms for NER</p>
+            <dl class="longlist" style="font-size: 70%">
+                <dt>handcrafted systems[1]</dt>
+                <dd>early works. High precision for small scale</dd>
+
+                <dt> <strong>supervised learning</strong> </dt>
+                <dd>
+                <ul class="sublist">
+                    <li>Hidden Markov Model</li>
+                    <li>Maximum Entropy Markov Model</li>
+                    <li>Conditional Random Fields[2]</li>
+                </ul>
+                current dominated method, works well for type specified tasks
+                </dd>
+
+                <dt>semi/un-supervised learning[3]</dt>
+                <dd>future direction</dd>
+
+                <footer>
+                    <p>
+                        [1]: <span class="ref">Extracting Company Names from Text</span>, Rau 1991
+                    </p>
+                    <p>
+                        [2]: <span class="ref">Early Results for Named Entity Recognition with Conditional
+Random Fields</span>, McCallum 2003
+                    </p>
+                    <p>
+                        [3]: <span class="ref">Unsupervised Named-Entity Extraction from the Web</span>, Etzioni 2005
+                    </p>
+                </footer>
+            </ul>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="" >
+            <div style="font-size:70%">
+                <p>NER as Sequence Labelling</p>
+                <ul>
+                    <dt>3 kinds of labels</dt>
+                    <dd>
+                    "beginning", "in the middle", "not named entity"
+                    </dd>
+
+                    <dd>
+                    natural application for <strong>Hidden Markov Model</strong>!
+                    </dd>
+
+                    <dt> <strong>drawback</strong> of HMM (or any other generative models) </dt>
+
+                    <dd>
+                    effective NER systems needs <strong>many</strong> (maybe interdependent) features, 
+                    <br>
+                    which are hard to model a distribution for generative models
+                    </dd>
+
+                    <dt>CRF comes to the rescue!</dt>
+                    <dd>
+                    conditional(HMM) -&gt; CRF<br>
+                    conditional(naive-bayes) -&gt; logistic-regression
+                    ...
+                    </dd>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="" >
+            <div style="font-size:70%">
+                <p>Terminology about CRF</p>
+                <dl>
+
+                <dt> Probabilistic Graphical Model </dt>
+                <dd>
+                    use a graph-based representation as the foundation for encoding a complete distribution over a multi-dimensional space,
+                    including: 
+                    <ul class="sublist">
+                        <li>undirected model</li>
+                        <li>directed model</li>
+                    </ul>
+                </dd>
+
+                <dt> Undirected graphical models </dt>
+                <dd> also called <span style="font-weight:bold">Gibbs distributions, Markov random fields, Markov networks</span></dd>
+
+                <dt> Directed graphical models</dt>
+                <dd> also called <span style="font-weight:bold">Bayesian networks</span></dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="step">
+            <div style="font-size:60%">
+                <p>What's undirected graphical model?</p>
+                <dl>
+                    <dt>Definition:</dt>
+                    <dd>
+                        Let \(Y\) be a set of some random variables, given a collection of subsets of \(Y\): \(\{Y_a | a = 1 ... A\}\). 
+                        <br> <br>
+                        If a distribution over \(Y\) can be written as the form: 
+                        $$ p(Y={\bf y}) = \frac{1}{Z} \prod_{a=1}^{A}\Psi_a(Y_a)$$
+                        (call \(p(\cdot)\) can be factorized, \(\Psi(\cdot) s\) are called factors)
+
+                        <br><br>
+                        Then we call this distribution is a Gibbs distribution or a undirected graphical model.
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="" >
+            <div style="font-size:60%">
+                <p>
+                    why we call it undirected model?
+                </p>
+                <br>
+                The factorization can be represented naturally by means of graph. 
+                <dl>
+                    <dt>Factor Graph</dt>
+                    <dd>A bipartite graph (V, F, E). 
+                    <ol class="sublist">
+                        <li>
+                        V = {1, 2, ..., |Y|} each node represents a random variable of \(Y\)
+                        </li>
+                        <li>
+                        F = {1, 2, ..., |A|} each node represents a factor
+                        </li>
+                        <li>
+                        If \(V_i\) has an egde with \(F_j\), then \(y_i\) is an argument of \(\Psi _j\)
+                        </li>
+                    </ol>
+                    </dd>
+
+                    <dt>Example</dt>
+                    <dd>
+                    \(p(y_1, y_2, y_3) = \frac{1}{Z} \Psi_1(y_1, y_2) \Psi_2(y_1, y_3)\Psi_3(y_2, y_3)\)
+
+                    <img src="factor.png" alt="" style="margin-left:30%">
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="step slide">
+            <div style="font-size:50%">
+                <p>What's Markov Random Field</p>
+                <dl>
+                    <dt>definition</dt>
+                    <dd>Given a multivariate distribution, an undirected graph (V, E), every nodes represent a random variable of the distribution. If the distribution holds three <strong>local Markov properties</strong> with respect to the graph, it is called a Markov Random Field (Markov networks) </dd>
+                    <dt>pairwise Markov property</dt>
+                    <dd>any two non-adjacent variables are conditionally independent given all other variables</dd>
+
+                    <dt>local Markov property</dt>
+                    <dd>a variable is conditionally independent of all other variables given its neighbors</dd>
+
+                    <dt>global Markov property</dt>
+                    <dd>any two subsets of variables are conditionally independent given a separating subset</dd>
+
+                    <dt>Hammersley–Clifford theorem</dt>
+                    <dd>Every Markov random field is equivalent to an undirected graphical model(as defined above)</dd>
+                </dl>
+                so we don't distinguish Markov random field and undirected graphical model.
+            </div>
+        </div>
+
+        <div class="step slide">
+            <div style="font-size:70%">
+                <p>What's CRF?</p>
+                <dl>
+                    <dt>Conditional random fields</dt>
+                    <dd>
+                    Let \(X\) and \(Y\) be sets of random variables, G be a factor graph over \((X, Y)\). 
+                    <br>
+                    If for any value \({\bf x}\) of \(X\), the distribution \(p({\bf{y|x}})\) factorize according to G.
+                    Then \( (X, Y) \) is a conditional random field.
+                    </dd>
+                </dl>
+                \(X\) are usually observable variables, we want to predict \(Y\) by \(X\).
+                <br>
+                <br>
+                <img src="graph_lincrf_transp.png" alt="">
+                <br>
+                a simple linear-chain CRF
+            </div>
+        </div>
+
+        <div class="step slide">
+            <div style="font-size:50%">
+                <p>CRF for NER: a case study</p>
+                <br>
+                <p>for a text sequence w<sub>1</sub>, w<sub>2</sub>, ..., w<sub>T</sub>: </p>
+                <dl style="margin-top:0%">
+                    <dt>Y</dt>
+                    <dd>\(Y=\{y_i \in \{B, M, N\}| 1 \leq i \leq T\}\), \(y_i\) is the label (we want to predict) for the i-th word in the text</dd>
+                    <dt>X</dt>
+                    <dd>\(X=\{{\bf x_i} | 1\leq i \leq T \}\), \({\bf x_i }\) is the feature vector for i-th word, including: the identity of the word, the identity of the previous word, the identity of the next word, part of the speech tag, ...(many other features) </dd>
+
+                    <dt>the conditional distribution</dt>
+                    <dd class="magnifier">
+                    $$ \begin{align} 
+                    p({\bf y|x}) =  \frac{1}{Z(x)} &exp(k_1 * [y_1 = B][x_{1,0} = 1]) ... \\ & exp(k_i * [y_1 = M][x_{1,0} = 1])... \\
+                        & ... (\text{many and many}) \\
+                        p({\bf y|x}) =  \frac{1}{Z(x)} &\prod_{t=1}^{T}{exp\{\sum_{i=1}^{K}k_i f_i(y_t, y_{t-1}, {\bf x}_t)\}}
+                       \end{align}
+                    $$
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="step slide">
+            <div style="font-size:65%">
+                <p> parameter estimation &amp; inference </p>
+
+                <ol>
+                    <li>
+                    parameter estimation are usually done by <strong>maximum likelihood</strong>(like logistic regression). The difficulty
+                    is calculating the normalization term \(Z(x)\) (required by gradient descent) or some marginals \(p(y_i | {\bf x})\) used by quasi newton optimizing methods. Calculating these terms is a inference problem.
+                    </li>
+
+                    <li>
+                    we have tow kinds of inference problems: 
+                        <ol class="sublist">
+                            <li>Calculating <strong>marginals</strong> of subsets of \(Y\)</li>
+                            <li>(After training)Given a new text segment, 
+                        infer the most probable \(Y\) (<strong>maximize</strong> \( p({\bf y|x})) \)</li>
+                        </ol>
+                    these two are fundamentally the same(sum v.s  max).
+                    </li>
+                </ol>
+
+                <br>
+                <p style="font-size:larger">
+                    So, inference is the key point!
+                </p>
+            </div>
+        </div>
+
+        <div class="step slide">
+            <div style="font-size:58%">
+                <ul>
+                    <li>
+                        Happily, the inference problem of linear chain CRF can be solved by the same algorithms as HMM.
+                        Viterbi algorithm for maximizing inference, forward-backward for marginal inference
+                    </li>
+
+                    <li>
+                        Tree-structured CRF and uncyclic graph CRF can also be solved by <strong>dynamic programming</strong> algorithm just
+                        like Viterbi and forward-backward algorithm.
+                    </li>
+
+                    <li>
+                        Inference for general graphs is difficult(NP-Hard?). We have to do some <strong>approximation</strong>.
+                        <ul class="sublist">
+                            <li><strong>MCMC</strong>(Markov Chain Monte Carlo) methods(like Gibbs sampling) can be used.</li>
+                            <li>After transforming the inference problem into optimizing problem, <strong>variational method</strong> can be used.</li>
+                        </ul>
+                        The inference subroutine are called by parameter estimation subroutine for many times, so the faster variational method are preferred.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="" >
+            <div style="font-size:70%">
+                <q>It works!</q> (F-measure larger than 90%)
+
+                <br>
+                <br>
+                <p>
+                    But it's not fun. 
+                    This method needs enormous human intervention and cannot generalize (well).
+                </p>
+
+                <br>
+                <p>
+                    It only uses <strong>shallow level</strong> lexical features, 
+                    not exploiting any <strong>underlying</strong> features of named entity or rigid designators. 
+                </p>
+
+                <br>
+                <p>
+                    We want <strong>unsupervised</strong> method!
+                </p>
+            </div>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="" >
+            <div style="font-size:70%">
+                <p>
+                exploration in unsupervised fields:
+                <p>
+                <ul style="font-size: 70%">
+                    <li>
+                    Y. Shinyama and Sekine (2004) used an observation that named entities often
+                    appear synchronously in several news articles, whereas common nouns do not. They
+                    found a strong correlation between being a named entity and appearing punctually (in
+                    time) and simultaneously in multiple news sources. This technique allows identifying rare
+                    named entities in an unsupervised manner and can be useful in combination with other
+                    NERC methods.
+                    </li> 
+
+                    <hr>
+                    <li>
+                    Nadeau D. 2006 proposed a model can automatically generate accurate large-size list of entities
+                    (with a very small seed set) with a simple form of named-entity disambiguation.
+                    </li>
+
+                    <hr>
+                    <li>
+                    A. McCallum and B. Wellner (NIPS 2004) developed an model for coreference analysis.
+                    It ... //TODO
+                    </li>
+                    <hr>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="step slide" data-x="" data-y="" data-z="" data-rotate-y="" >
+            <ul>
+                <li>semi-supervised and unsupervised approaches with large corpus</li>
+                <li>handle multiple NE types and complex linguistic phenomena</li>
+                <li>application to bioinfomatics and multimedia</li>
+                <li>...</li>
+            </ul>
+        </div>
+
+
+        <div class="step slide">
+            <q style="position:relative; top:30%; left:40%;">Thank you. ^.^</q>
+            <p style="position:relative; top:36%; left:30%; font-size:50%">
+            This slide is written by html with CSS3, Javascript. 
+            <br>Powered by <a href="">impress.js</a>, jQuery.
+            </p>
+        </div>
+    </div>
+    <script src="./js/jquery.min.js"></script>
+    <script>
+        var sumX = 0;
+        var sumY = 0;
+        function posFunc(ind, numSlides){
+            pos = {};
+            var theta = ind / numSlides * 2 * Math.PI;
+            var r = 5000;
+            pos.xpos = 5000 +  r * Math.cos(theta);
+            pos.ypos = 5000 +  r * Math.sin(theta);
+
+            pos.xRotatePos = 0;
+            pos.yRotatePos = 0;
+            pos.zRotatePos = 0;         
+
+            sumX += pos.xpos;
+            sumY += pos.ypos;
+            return pos;
+        }
+
+        var numSlides = 0;
+        $('.step').not("#overview").each(function(i){
+                numSlides = numSlides + 1;
+        });
+        $('.step').not("#overview").each(function(i){
+                console.log(i);
+                pos = posFunc(i, numSlides);
+                $(this).attr("data-x", pos.xpos);
+                $(this).attr("data-y", pos.ypos);
+                $(this).attr("data-z", pos.zpos);
+                $(this).attr("data-rotate-x", pos.xRotatePos);
+                $(this).attr("data-rotate-y", pos.yRotatePos);
+                $(this).attr("data-rotate-z", pos.zRotatePos);
+        });
+        $("#overview").attr("data-x", sumX / numSlides);
+        $("#overview").attr("data-y", sumY / numSlides);
+    </script>
+    <script src="js/impress.js"></script>
+    <script>impress().init();</script>
+    <script>
+    </script>
+</body>
+<html>

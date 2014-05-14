@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/scheme/impress.scm/demo.scm.html</title>
+<meta name="Generator" content="Vim/7.4">
+<meta name="plugin-version" content="vim7.4_v1">
+<meta name="syntax" content="scheme">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="solarized">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #657b83; background-color: #fdf6e3; }
+body { font-family: monospace; color: #657b83; background-color: #fdf6e3; }
+* { font-size: 1em; }
+.hlLevel0 { color: #cd0000; }
+.hlLevel1 { color: #cd3700; }
+.hlLevel2 { color: #ee9a00; }
+.Comment { color: #93a1a1; font-style: italic; }
+.Constant { color: #2aa198; }
+.Identifier { color: #268bd2; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="hlLevel0">(</span><span class="Identifier">load</span> <span class="Constant">&quot;impress.scm&quot;</span><span class="hlLevel0">)</span>
+
+<span class="hlLevel0">(</span>impress
+  <span class="hlLevel1">(</span>font-size <span class="Constant">&quot;24px&quot;</span><span class="hlLevel1">)</span>
+  <span class="hlLevel1">(</span>slide-cover <span class="Constant">&quot;impress.scm!&quot;</span>
+               <span class="Constant">&quot;elegant slides written in scheme&quot;</span>
+               <span class="Constant">&quot;yang zhixuan&quot;</span><span class="hlLevel1">)</span>
+  <span class="hlLevel1">(</span>slide
+    <span class="hlLevel2">(</span>text <span class="Constant">&quot;write down what you want to present in impress.scm&quot;</span><span class="hlLevel2">)</span><span class="hlLevel1">)</span>
+
+  <span class="Comment">; ...</span>
+
+  <span class="hlLevel1">(</span>output-filename <span class="Constant">&quot;templates/demo.html&quot;</span><span class="hlLevel1">)</span><span class="hlLevel0">)</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
